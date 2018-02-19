@@ -1,6 +1,6 @@
 # Interactive-Project
 
-First version requires input from the ConvnetOsc module.
+First version requires input from the ConvnetOsc module (1000 inputs).
 
 Final version requires image-net-2012.sqlite3 to be blaced in the bin/data/ folder. The file can be downloaded [here](https://raw.githubusercontent.com/liuliu/ccv/unstable/samples/image-net-2012.sqlite3).
 # Original Idea
