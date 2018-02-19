@@ -1,24 +1,21 @@
 # Interactive-Project
-This project is due Monday, February 19th.
 
-## Prompt
-Come up with some project call that you have been awarded. Perhaps you got awarded the job of coming up with a system that allows people to use gestures in their home to activate/deactivate various appliances/lights/etc. Or perhaps you got awarded the job to create a system that tracks and understands museum vistor movements in a space and triggers various sounds, visuals, and/or something else in an interactive installation. Or perhaps you were awarded a project tasked with building an interface for a new musical instrument, or maybe a game project, or.... (fill in the blank). This project could take many forms, but needs to include realtime machine learning trained with one or more sensors, and some sort of output. Be as detailed as possible about the project call, what is the setting, what the input should be, what the output should be, etc. Don't start thinking about the tech first, think about the thing you want to create first. After that, then think about what tools are needed for building the project.
+# Original Idea
 
-## Expectations
-This project is one of the 4 major projects due during the semester and should be much more developed and polished than the weekly exercises. Having said that, it doesn't have to be an enterprise solution, it can certainly be at a proof of concept stage. As mentioned above, you have to use some sort of machine learning as a processing step between your input and your ouput. However, that doesn't have to be limited to Wekinator strictly. You are free to use other platforms if you prefer. If you have questions about what I will consider as "Machine Learning", please ask. 
+The original idea for this project was to use a smartphone camera to recognize touch gestures on a non-touch screen. The motivation for this was that certain gestures are easier to perform on a touch screen compared to a trackpad or keyboard. For example, signing a pdf document or scrolling through an ebook may feel more natural by hand rather than through the trackpad. Furthermore, it may be possible to define three-dimensional gestures that do not touch the screen. For example, swiping up with four fingers on a mac screen may open up mission control, but swiping up four fingers in the air in front of the screen may raise the volume instead. While these gestures could possibly be useful, the main aim was still to achieve touch gestures on a non-touch screen.
 
-The documentation for this project should be more much detailed as well. Take videos/pictures every step of development, so you can tell a story later. You're documentation should include whatever other informative information you can provide as well, like sketches, text, diagrams, etc. We will do user testing in class. Your documentation should address your user testing feedback. You don't have to accept all user testing feedback, but you should explain why you did not. Your original proposal should be included in your documentation as well.
+Although the project seemed difficult, it still seamed feasbile. If a smartphone was aligned with a screen in such a way that the line of sight of the camera was along the plane of the screen, then it would be possible to recognize when the screen had been touched. Furthermore, as the hand grew closer or further away, its size would change from the perspective of the camera, thereby allowing us to determine its position along the x-axis of the screen. As the hand went up or down, it would also go up or down from the perspective of the camera, therefore allowing us to determine the position along the y-axis.
 
-Push all code and assets needed to run your project to your repo. You should also include detailed instructions on how to set up and operate your project.
+# Prototype Idea
 
-## Deadlines
-* Idea Proposal - Due Feb. 5th
-* Working Prototype - Due Feb. 14th
-* ***Finished Version - Due Feb. 19th*** 
+After beginning the project, a few problems immediately appeared. The first was that sending a live stream from a smartphone to a computer was slow and difficult. Second was that the smartphone would have nothing to keep it stable, meaning that anyone who wanted to use this program would have to have a dock or some form of holder. To resolve these two difficulties, I switched from using the smartphone to using the laptop camera, and had the camera pointed at a computer monitor. This ensured that the camera was stable, and that the live stream would not need to be transferred externally. For people who use their laptops in a kind of 'workstation' setup, with a keyboard and monitor and other peripherals connected, the laptop might not actually be used directly. In this kind of setup, using the laptop instead of the smartphone may actually be desired.
 
-## Grading Rubric
-* 20% Idea Proposal - Due Feb. 5th
-* 20% Working Prototype - Due Feb. 14th
-* 20% Creativity
-* 20% Clear Interaction - it's very clear to a user what they are doing, and how they're doing it
-* 20% Consistent - the system works consistently
+Another problem was that the camera stream had to be transformed before going into a classifier. If the camera stream was used directly, even if it worked, there would exist a certain boundary beyond which none of the training data would pass. When training, all the 'touch' gestures would be along the boundary, and non-touch gestures would be behind. There would be no training sets where the hand passes through the computer monitor screen. What this means is that a boundary would be created such that anything before or after that boundary would not be recognized as a touch gesture. Thus, if the laptop were to be shifted slightly, none of the gestures would be recognized as touch gestures anymore.
+
+When testing different training models, I tried sending the video stream into a cnn, and the output of the cnn (the last layer) into a classifier. I am not completely sure as to why this worked, but it is possible that the cnn was recognizing the 'distorted' hands as different objects. When the distortion was similar, such as when pressing the same button, it would be recognized as the same by the cnn again. While not completely accurate, it was accurate enough for the occasional use, recognizing about 80-90% of the touches, and having very few false positives when the hand was outside the range of the camera. However, it was still highly dependent on the background. During the user testing, I found that I had to re-train the classifier in the new environment. The accuracy seemed to have dropped with this new background, though part of the drop can also be attributed to the fewer training samples used. Furthermore, when the background changed, such as when a person appeared in the background, the accuracy would drop significantly. Thus, there were not too many advantages in using this version.
+
+[Aadi](https://youtu.be/zebaHpginQI), [Aadi](https://youtu.be/hMMofna8Z3g), [Aadi](https://youtu.be/jvUD_hfI7rI)
+
+# Final Version
+
+To reduce the effect of the background on the accuracy of the model, I decided to use background subtraction to reduce the excess pixels. However, this also removed the monitor from the frame. Without the monitor, the same problem with the 'boundary' would occur again, since it would simply appear as if the hand were reaching a certain point and stopping.  
