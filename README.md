@@ -14,7 +14,7 @@ Another problem was that the camera stream had to be transformed before going in
 
 When testing different training models, I tried sending the video stream into a cnn, and the output of the cnn (the last layer) into a classifier. I am not completely sure as to why this worked, but it is possible that the cnn was recognizing the 'distorted' hands as different objects. When the distortion was similar, such as when pressing the same button, it would be recognized as the same by the cnn again. While not completely accurate, it was accurate enough for the occasional use, recognizing about 80-90% of the touches, and having very few false positives when the hand was outside the range of the camera. However, it was still highly dependent on the background. During the user testing, I found that I had to re-train the classifier in the new environment. The accuracy seemed to have dropped with this new background, though part of the drop can also be attributed to the fewer training samples used. Furthermore, when the background changed, such as when a person appeared in the background, the accuracy would drop significantly. Thus, there were not too many advantages in using this version.
 
-[Aadi](https://youtu.be/zebaHpginQI), [Aadi](https://youtu.be/hMMofna8Z3g), [Aadi](https://youtu.be/jvUD_hfI7rI)
+[User Test 1](https://youtu.be/zebaHpginQI), [User Test 2](https://youtu.be/hMMofna8Z3g), [User Test 3](https://youtu.be/jvUD_hfI7rI)
 
 # Final Version
 
