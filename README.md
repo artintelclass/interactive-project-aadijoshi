@@ -1,5 +1,8 @@
 # Interactive-Project
 
+First version requires input from the ConvnetOsc module.
+
+Final version requires image-net-2012.sqlite3 to be blaced in the bin/data/ folder. The file can be downloaded [here](https://raw.githubusercontent.com/liuliu/ccv/unstable/samples/image-net-2012.sqlite3).
 # Original Idea
 
 The original idea for this project was to use a smartphone camera to recognize touch gestures on a non-touch screen. The motivation for this was that certain gestures are easier to perform on a touch screen compared to a trackpad or keyboard. For example, signing a pdf document or scrolling through an ebook may feel more natural by hand rather than through the trackpad. Furthermore, it may be possible to define three-dimensional gestures that do not touch the screen. For example, swiping up with four fingers on a mac screen may open up mission control, but swiping up four fingers in the air in front of the screen may raise the volume instead. While these gestures could possibly be useful, the main aim was still to achieve touch gestures on a non-touch screen.
